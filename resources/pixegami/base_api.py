@@ -8,7 +8,7 @@ from requests import Response
 import data as data
 
 
-class BasePage:
+class BaseApi:
     """Base class for every page object of the application under test
     Includes all basic page methods, applicable to every page, like (delete task,
     create task, get task info, update task, and many more)
@@ -19,6 +19,12 @@ class BasePage:
         """
         self.endpoint = data.endpoint
 
+    def can_call_endpoint(self):
+        response = requests.get(self.endpoint)
+        # return response.status_code
+        if not response.status_code == 200:
+            return False
+        return True
     def create_task(self, payload) -> Response:
         """
         Making an API call to create task with desired payload

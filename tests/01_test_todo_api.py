@@ -1,6 +1,6 @@
 """
 sys and os libraries necessary to implement the code, that automatically determining the path and allowing to
-use relative path to the files for import from different foldars
+use relative path to the files for import from different folders
 """
 import sys
 import os
@@ -12,19 +12,19 @@ from application import Application
 
 
 class TestTodoAPI:
-    app = Application.todo_page
+    api = Application.todo_api
 
     def test_api_is_callable(self):
-        assert self.app.can_call_endpoint() == True
+        assert self.api.can_call_endpoint() == True
 
     def test_task_is_created(self):
-        assert self.app.can_create_task() == True
+        assert self.api.can_create_task() == True
 
     def test_task_is_updated(self):
-        assert self.app.can_update_task() == True
+        assert self.api.can_update_task() == True
 
     def test_tasks_is_listed(self):
-        assert self.app.can_list_tasks() == True
+        assert self.api.can_list_tasks() == True
 
     def test_task_is_deleted(self):
-        assert self.app.can_delete_task() == True
+        assert self.api.can_delete_task() == True
