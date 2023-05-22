@@ -15,16 +15,16 @@ class TestTodoAPI:
     api = Application.todo_api
 
     def test_api_is_callable(self):
-        assert self.api.can_call_endpoint() == True
+        assert self.api.endpoint_is_callable() == True
 
     def test_task_is_created(self):
-        assert self.api.can_create_task() == True
+        assert self.api.post_create_task() == True
 
     def test_task_is_updated(self):
-        assert self.api.can_update_task() == True
+        assert self.api.post_update_task() == True
 
     def test_tasks_is_listed(self):
-        assert self.api.can_list_tasks() == True
+        assert self.api.get_tasks_list() == True
 
     def test_task_is_deleted(self):
-        assert self.api.can_delete_task() == True
+        assert self.api.post_delete_task() == True

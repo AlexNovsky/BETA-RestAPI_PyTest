@@ -5,8 +5,8 @@ from base_api import BaseApi
 # class TodoPage:
 class TodoApi(BaseApi):
 
-    def can_create_task(self):
-        payload = self.new_task_payload()
+    def post_create_task(self):
+        payload = self.generate_task_payload()
         create_task_response = self.create_task(payload)
         if not create_task_response.status_code == 200:
             return False
@@ -27,8 +27,8 @@ class TodoApi(BaseApi):
             return False
         return True
 
-    def can_update_task(self):
-        payload = self.new_task_payload()
+    def post_update_task(self):
+        payload = self.generate_task_payload()
         create_task_response = self.create_task(payload)
         task_id = create_task_response.json()["task"]["task_id"]
 
@@ -53,9 +53,9 @@ class TodoApi(BaseApi):
             return False
         return True
 
-    def can_list_tasks(self):
+    def get_tasks_list(self):
         n = 3
-        payload = self.new_task_payload()
+        payload = self.generate_task_payload()
         for t in range(n):
             create_task_response = self.create_task(payload)
             if not create_task_response.status_code == 200:
@@ -72,8 +72,8 @@ class TodoApi(BaseApi):
             return False
         return True
 
-    def can_delete_task(self):
-        payload = self.new_task_payload()
+    def post_delete_task(self):
+        payload = self.generate_task_payload()
         create_task_response = self.create_task(payload)
         if not create_task_response.status_code == 200:
             return False

@@ -19,7 +19,7 @@ class BaseApi:
         """
         self.endpoint = data.endpoint
 
-    def can_call_endpoint(self):
+    def endpoint_is_callable(self):
         response = requests.get(self.endpoint)
         # return response.status_code
         if not response.status_code == 200:
@@ -57,7 +57,7 @@ class BaseApi:
         """
         return requests.get(self.endpoint + f"/list-tasks/{user_id}")
 
-    def new_task_payload(self) -> dict[str, str]:
+    def generate_task_payload(self) -> dict[str, str]:
         """
         Function generates a payload with random user_id and content
         :return:            New generated payload with unique user_id and content
