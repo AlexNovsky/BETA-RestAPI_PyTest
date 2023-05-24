@@ -8,24 +8,14 @@ class TodoApi(BaseApi):
     def post_create_task(self):
         payload = self.generate_task_payload()
         create_task_response = self.create_task(payload)
-        if not create_task_response.status_code == 200:
-            return False
+        create_task_response_status = create_task_response.status_code
 
         data = create_task_response.json()
-
         task_id = data["task"]["task_id"]
         get_task_response = self.get_task(task_id)
-        if not get_task_response.status_code == 200:
-            return False
-
+        get_task_response_status = get_task_response.status_code
         get_task_data = get_task_response.json()
-        if not get_task_data["content"] == payload["content"]:
-            return False
-        if not get_task_data["user_id"] == payload["user_id"]:
-            return False
-        if not get_task_data["task_id"] == task_id:
-            return False
-        return True
+        return create_task_response_status, get_task_response_status, payload, get_task_data, task_id
 
     def post_update_task(self):
         payload = self.generate_task_payload()
@@ -39,51 +29,39 @@ class TodoApi(BaseApi):
             "is_done": True,
         }
         update_task_response = self.update_task(new_payload)
-        if not update_task_response.status_code == 200:
-            return False
-
+        update_task_response_status = update_task_response.status_code
         get_task_response = self.get_task(task_id)
-        if not get_task_response.status_code == 200:
-            return False
-
+        get_task_response_status = get_task_response.status_code
         get_task_data = get_task_response.json()
-        if not get_task_data["content"] == new_payload["content"]:
-            return False
-        if not get_task_data["is_done"] == new_payload["is_done"]:
-            return False
-        return True
+        return get_task_data, new_payload, update_task_response_status, get_task_response_status
 
     def get_tasks_list(self):
+        global create_task_response_status
         n = 3
         payload = self.generate_task_payload()
         for t in range(n):
             create_task_response = self.create_task(payload)
-            if not create_task_response.status_code == 200:
-                return False
+            ''''''
+            create_task_response_status = create_task_response.status_code
 
         user_id = payload["user_id"]
         list_tasks_response = self.list_tasks(user_id)
-        if not list_tasks_response.status_code == 200:
-            return False
+        ''''''
+        list_tasks_response_status = list_tasks_response.status_code
         data = list_tasks_response.json()
 
         tasks = data["tasks"]
-        if not len(tasks) == n:
-            return False
-        return True
+        number_of_tasks = len(tasks)
+        return n, create_task_response_status, list_tasks_response_status, number_of_tasks
 
     def post_delete_task(self):
         payload = self.generate_task_payload()
         create_task_response = self.create_task(payload)
-        if not create_task_response.status_code == 200:
-            return False
-
+        create_task_response_status = create_task_response.status_code
         task_id = create_task_response.json()["task"]["task_id"]
         delete_task_response = self.delete_task(task_id)
-        if not delete_task_response.status_code == 200:
-            return False
+        delete_task_response_status = delete_task_response.status_code
 
-        get_task_response = self.get_task(task_id)
-        if not get_task_response.status_code == 404:
-            return False
-        return True
+        get_deleted_task_response = self.get_task(task_id)
+        get_deleted_task_response_status = get_deleted_task_response.status_code
+        return create_task_response_status, delete_task_response_status, get_deleted_task_response_status

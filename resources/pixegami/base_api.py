@@ -19,12 +19,24 @@ class BaseApi:
         """
         self.endpoint = data.endpoint
 
+    def assertEqual(self, compared, value) -> bool:
+        """
+        Making assertion between actual value and expected value
+        :param compared:    Actual value, that compared to expected value
+        :param value:       Expected result(value)
+        :return:            True if Assertion done without errors
+                            False if Assertion done with mistake (values does not match)
+        """
+        assert compared == value
+
     def endpoint_is_callable(self):
-        response = requests.get(self.endpoint)
-        # return response.status_code
-        if not response.status_code == 200:
-            return False
-        return True
+        """
+        Checking that endpoint is callable
+        :return:            Status code of API call (200 for successful request/call)
+        """
+        response_status_code = requests.get(self.endpoint).status_code
+        return response_status_code
+
     def create_task(self, payload) -> Response:
         """
         Making an API call to create task with desired payload
