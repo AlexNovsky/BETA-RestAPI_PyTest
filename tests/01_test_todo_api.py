@@ -9,7 +9,6 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(os.path.join(parent_dir, 'resources', 'pixegami'))
 
 from application import Application
-import pytest
 
 
 class TestTodoAPI:
