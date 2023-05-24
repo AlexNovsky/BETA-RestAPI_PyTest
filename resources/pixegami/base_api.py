@@ -19,7 +19,7 @@ class BaseApi:
         """
         self.endpoint = data.endpoint
 
-    def assertEqual(self, compared, value) -> bool:
+    def assert_is_Equal(self, compared, value) -> bool:
         """
         Making assertion between actual value and expected value
         :param compared:    Actual value, that compared to expected value
