@@ -36,17 +36,15 @@ class TodoApi(BaseApi):
         return get_task_data, new_payload, update_task_response_status, get_task_response_status
 
     def get_tasks_list(self):
-        global create_task_response_status
+        # global create_task_response_status
         n = 3
         payload = self.generate_task_payload()
         for t in range(n):
             create_task_response = self.create_task(payload)
-            ''''''
             create_task_response_status = create_task_response.status_code
 
         user_id = payload["user_id"]
         list_tasks_response = self.list_tasks(user_id)
-        ''''''
         list_tasks_response_status = list_tasks_response.status_code
         data = list_tasks_response.json()
 
