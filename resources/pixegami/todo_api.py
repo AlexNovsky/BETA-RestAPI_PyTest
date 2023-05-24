@@ -1,8 +1,6 @@
-import requests
 from base_api import BaseApi
 
 
-# class TodoPage:
 class TodoApi(BaseApi):
 
     def post_create_task(self):
