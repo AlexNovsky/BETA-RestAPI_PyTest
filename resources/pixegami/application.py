@@ -1,5 +1,6 @@
-from base_api import BaseApi
-from todo_api import TodoApi
+from resources.pixegami.base_api import BaseApi
+from resources.pixegami.todo_api import TodoApi
+
 
 class Application:
         """Returns an object, containing all the Page Objects of the application under test.

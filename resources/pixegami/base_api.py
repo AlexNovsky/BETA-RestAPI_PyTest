@@ -1,9 +1,9 @@
 import requests
 import uuid
-
 from requests import Response
+from typing import Dict
 
-import data as data
+from resources.pixegami import data
 
 
 class BaseApi:
@@ -17,23 +17,13 @@ class BaseApi:
         """
         self.endpoint = data.endpoint
 
-    def assert_is_Equal(self, compared, value) -> bool:
-        """
-        Making assertion between actual value and expected value
-        :param compared:    Actual value, that compared to expected value
-        :param value:       Expected result(value)
-        :return:            True if Assertion done without errors
-                            False if Assertion done with mistake (values does not match)
-        """
-        assert compared == value
-
-    def endpoint_is_callable(self):
+    def endpoint_is_callable(self) -> bool:
         """
         Checking that endpoint is callable
         :return:            Status code of API call (200 for successful request/call)
         """
         response_status_code = requests.get(self.endpoint).status_code
-        return response_status_code
+        return response_status_code == 200
 
     def create_task(self, payload) -> Response:
         """
@@ -67,7 +57,7 @@ class BaseApi:
         """
         return requests.get(self.endpoint + f"/list-tasks/{user_id}")
 
-    def generate_task_payload(self) -> dict[str, str]:
+    def generate_task_payload(self) -> Dict[str, str]:
         """
         Function generates a payload with random user_id and content
         :return:            New generated payload with unique user_id and content
