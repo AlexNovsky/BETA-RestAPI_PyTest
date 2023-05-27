@@ -1,4 +1,4 @@
-from base_api import BaseApi
+from resources.pixegami.base_api import BaseApi
 
 
 class TodoApi(BaseApi):
