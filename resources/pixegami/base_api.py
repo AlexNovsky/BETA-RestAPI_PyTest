@@ -1,8 +1,6 @@
 import requests
-import uuid
 from requests import Response
 from typing import Dict
-
 from resources.pixegami import data
 
 
@@ -15,65 +13,79 @@ class BaseApi:
         """
         Initializing endpoint variable for the class from external endpoint, stored in separate file
         """
-        self.endpoint = data.endpoint
+        self.data = data
+        self.url = self.data.base_url
 
-    def endpoint_is_callable(self) -> bool:
+    def app_is_up(self) -> bool:
         """
         Checking that endpoint is callable
         :return:            Status code of API call (200 for successful request/call)
         """
-        response_status_code = requests.get(self.endpoint).status_code
-        return response_status_code == 200
+        return requests.get(self.url).status_code == 200
 
-    def create_task(self, payload) -> Response:
+    def get(self, url: str) -> Response:
+        """
+        Making an API call to get specific task information (payload)
+        :param url:         Url of the task, which payload has been requested
+        :return:            Payload if the task, specified by task_id
+        """
+        return requests.get(url)
+
+    def post(self, url: str, payload: Dict[str, str]) -> Response:
         """
         Making an API call to create task with desired payload
+        :param url:         Url of the task, which payload has been requested
         :param payload:     Payload,used for creating task
         :return:            Executed action (call - create)
         """
-        return requests.put(self.endpoint + "/create-task", json=payload)
+        return requests.post(url, json=payload)
 
-    def delete_task(self, task_id) -> Response:
+    def put(self, url: str, payload: Dict[str, str]) -> Response:
+        """
+        Making an API call to create task with desired payload
+        :param url:         Url of the task, which payload has been requested
+        :param payload:     Payload,used for creating task
+        :return:            Executed action (call - create)
+        """
+        return requests.put(url, json=payload)
+
+    def patch(self, url: str, payload: Dict[str, str]) -> Response:
+        """
+        Making an API call to create task with desired payload
+        :param url:         Url of the task, which payload has been requested
+        :param payload:     Payload,used for creating task
+        :return:            Executed action (call - create)
+        """
+        return requests.patch(url, json=payload)
+
+    def delete(self, url: str) -> Response:
         """
         Making an API call to delete specific task identified by task_id
-        :param task_id:     Id of the task to be deleted
+        :param url:     Url of the task, which payload has been requested
         :return:            Executed action (call - delete)
         """
-        return requests.delete(self.endpoint + f"/delete-task/{task_id}")
-
-    def get_task(self, task_id) -> Response:
-        """
-        Making an API call to get specific task information (payload)
-        :param task_id:     Id of the task, which payload has been requested
-        :return:            Payload if the task, specified by task_id
-        """
-        return requests.get(self.endpoint + f"/get-task/{task_id}")
-
-    def list_tasks(self, user_id) -> Response:
-        """
-        Making an API call to create a list of all tasks, created by specified user
-        :param user_id:     Id of the user who created the task
-        :return:            List of all user's tasks
-        """
-        return requests.get(self.endpoint + f"/list-tasks/{user_id}")
-
-    def generate_task_payload(self) -> Dict[str, str]:
-        """
-        Function generates a payload with random user_id and content
-        :return:            New generated payload with unique user_id and content
-        """
-        user_id = f"Alex_Novsky_{uuid.uuid4().hex}"
-        content = f"API_testing_{uuid.uuid4().hex}"
-        return {
-            "content": content,
-            "user_id": user_id,
-            "is_done": False,
-        }
-
-    def update_task(self, payload) -> Response:
-        """
-        Making an API call to update task with partially or fully modified payload
-        :param payload:     Updated payload for the task
-        :return:            Executed action (call - update)
-        """
-        return requests.put(self.endpoint + "/update-task", json=payload)
+        return requests.delete(url)
+    #
+    # def delete_task(self, task_id) -> Response:
+    #     """
+    #     Making an API call to delete specific task identified by task_id
+    #     :param task_id:     Id of the task to be deleted
+    #     :return:            Executed action (call - delete)
+    #     """
+    #     return requests.delete(self.url + f"/delete-task/{task_id}")
+    #
+    # def list_tasks(self, user_id) -> Response:
+    #     """
+    #     Making an API call to create a list of all tasks, created by specified user
+    #     :param user_id:     Id of the user who created the task
+    #     :return:            List of all user's tasks
+    #     """
+    #     return requests.get(self.url + f"/list-tasks/{user_id}")
+    #
+    # def update_task(self, payload) -> Response:
+    #     """
+    #     Making an API call to update task with partially or fully modified payload
+    #     :param payload:     Updated payload for the task
+    #     :return:            Executed action (call - update)
+    #     """
+    #     return requests.put(self.url + "/update-task", json=payload)

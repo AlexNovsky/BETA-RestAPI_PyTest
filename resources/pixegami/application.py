@@ -1,5 +1,6 @@
 from resources.pixegami.base_api import BaseApi
-from resources.pixegami.todo_api import TodoApi
+from resources.pixegami.create_task_api import CreateTaskApi
+from resources.pixegami.get_task_api import GetTaskApi
 
 
 class Application:
@@ -10,4 +11,5 @@ class Application:
         generation, search and comparison, etc.)
         """
         base_api = BaseApi()
-        todo_api = TodoApi()
+        create_task_api = CreateTaskApi()
+        get_task_api = GetTaskApi()

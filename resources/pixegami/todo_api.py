@@ -3,18 +3,6 @@ from resources.pixegami.base_api import BaseApi
 
 class TodoApi(BaseApi):
 
-    def post_create_task(self):
-        payload = self.generate_task_payload()
-        create_task_response = self.create_task(payload)
-        create_task_response_status = create_task_response.status_code
-
-        data = create_task_response.json()
-        task_id = data["task"]["task_id"]
-        get_task_response = self.get_task(task_id)
-        get_task_response_status = get_task_response.status_code
-        get_task_data = get_task_response.json()
-        return create_task_response_status, get_task_response_status, payload, get_task_data, task_id
-
     def post_update_task(self):
         payload = self.generate_task_payload()
         create_task_response = self.create_task(payload)
