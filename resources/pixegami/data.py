@@ -1,1 +1,1 @@
-endpoint = 'https://todo.pixegami.io'
+base_url = 'https://todo.pixegami.io'
