@@ -5,9 +5,7 @@ from resources.pixegami.base_api import BaseApi
 
 
 class CreateTaskApi(BaseApi):
-    """Base class for every page object of the application under test
-    Includes all basic page methods, applicable to every page, like (delete task,
-    create task, get task info, update task, and many more)
+    """Class, containing methods for tasks creation
     """
 
     def __init__(self):

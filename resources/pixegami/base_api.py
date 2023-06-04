@@ -5,8 +5,8 @@ from resources.pixegami import data
 
 
 class BaseApi:
-    """Base class for every page object of the application under test
-    Includes all basic page methods, applicable to every page, like (delete task,
+    """Base class for every API object of the API under test
+    Includes all basic methods, applicable to any API call, like (delete task,
     create task, get task info, update task, and many more)
     """
     def __init__(self):
@@ -58,22 +58,18 @@ class BaseApi:
         """
         return requests.patch(url, json=payload)
 
+    # def delete(self, url: str, payload: str) -> Response:
     def delete(self, url: str) -> Response:
         """
         Making an API call to delete specific task identified by task_id
+        :param payload:
+        :param user_id:
         :param url:     Url of the task, which payload has been requested
         :return:            Executed action (call - delete)
         """
+        # return requests.delete(url, payload)
         return requests.delete(url)
-    #
-    # def delete_task(self, task_id) -> Response:
-    #     """
-    #     Making an API call to delete specific task identified by task_id
-    #     :param task_id:     Id of the task to be deleted
-    #     :return:            Executed action (call - delete)
-    #     """
-    #     return requests.delete(self.url + f"/delete-task/{task_id}")
-    #
+
     # def list_tasks(self, user_id) -> Response:
     #     """
     #     Making an API call to create a list of all tasks, created by specified user
@@ -81,11 +77,3 @@ class BaseApi:
     #     :return:            List of all user's tasks
     #     """
     #     return requests.get(self.url + f"/list-tasks/{user_id}")
-    #
-    # def update_task(self, payload) -> Response:
-    #     """
-    #     Making an API call to update task with partially or fully modified payload
-    #     :param payload:     Updated payload for the task
-    #     :return:            Executed action (call - update)
-    #     """
-    #     return requests.put(self.url + "/update-task", json=payload)
