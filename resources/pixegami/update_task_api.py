@@ -17,6 +17,7 @@ class UpdateTaskApi(BaseApi):
         :param task_id:     Specific task_id
         :return:            Executed action (call - put)
         """
+        # TODO: make a function that generate updated payload instead hardcoded values
         payload = {
             "content": "updated payload",
             "user_id": user_id,
