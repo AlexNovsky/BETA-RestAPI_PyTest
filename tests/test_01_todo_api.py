@@ -62,8 +62,8 @@ class TestTodoAPI:
         delete_task_response_status = delete_task.status_code
         assert delete_task_response_status == 200
 
-        get_deleted_task_response_status = app.get_task_api.get_task(task_id)
-        assert get_deleted_task_response_status.status_code == 404
+        get_deleted_task_response = app.get_task_api.get_task(task_id)
+        assert get_deleted_task_response.status_code == 404
 
     def test_tasks_listed(self, app):
         tasks_to_create = 4

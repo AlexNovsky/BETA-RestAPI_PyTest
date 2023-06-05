@@ -15,8 +15,8 @@ from resources.pixegami.make_tasks_list_api import TasksListApi
 def app():
     """Fixture returns an object, containing all the API Objects of the application under test.
 
-        Includes BasePage with all its standard methods (delete task, create task, update task, etc.)
-        and all the child API objects with all specific methods (create, update, delete or list tasks)
+        Includes BaseApi with all its standard methods (delete task, create task, update task, etc.)
+        and all child API objects with all specific methods (create, update, delete or list tasks)
     """
     app.base_api = BaseApi()
     app.create_task_api = CreateTaskApi()
