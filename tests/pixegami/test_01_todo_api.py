@@ -1,7 +1,3 @@
-# import pytest
-#
-#
-# @pytest.mark.pixegami_api
 class TestTodoAPI:
     def test_app_is_up(self, app):
         assert app.base_api.app_is_up() is True

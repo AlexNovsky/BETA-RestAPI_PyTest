@@ -69,11 +69,3 @@ class BaseApi:
         """
         # return requests.delete(url, payload)
         return requests.delete(url)
-
-    # def list_tasks(self, user_id) -> Response:
-    #     """
-    #     Making an API call to create a list of all tasks, created by specified user
-    #     :param user_id:     Id of the user who created the task
-    #     :return:            List of all user's tasks
-    #     """
-    #     return requests.get(self.url + f"/list-tasks/{user_id}")
